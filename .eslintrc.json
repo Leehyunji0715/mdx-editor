@@ -1,0 +1,25 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["standard-with-typescript", "plugin:react/recommended"],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "react/react-in-jsx-scope": "off" /* React 17부터는 react import를 항상 할 필요가 없음, https://dev.to/titungdup/you-no-longer-need-to-import-react-from-react-3pbj */,
+    "import/no-absolute-path": "off",
+    "@typescript-eslint/space-before-function-paren": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/consistent-type-imports": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+      // Warning: React version not specified in eslint-plugin-react settings. react 버전 명시하기
+    }
+  }
+}
