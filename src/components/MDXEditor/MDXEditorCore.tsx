@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { renderToStaticMarkup } from 'react-dom/server'
+import { createRoot } from 'react-dom/client'
+import { flushSync } from 'react-dom'
 import * as runtime from 'react/jsx-runtime'
 import { useMDXComponents } from '@mdx-js/react'
 import { EvaluateOptions, evaluateSync } from '@mdx-js/mdx'
@@ -17,7 +18,7 @@ export const generate = (body: string, mdxComponents?: any) => {
 
   // https://mdxjs.com/packages/mdx/#notes
   // MDXContent({props}) 형식으로 직접 호출하는게 더 빠르다고 나옴
-  return renderToStaticMarkup(MDXContent({ components: mdxComponents }))
+  return MDXContent({ components: mdxComponents })
 }
 
 export default function MDXEditorCore({ defaultValue }: EditorCoreProps): React.ReactNode {
@@ -26,21 +27,32 @@ export default function MDXEditorCore({ defaultValue }: EditorCoreProps): React.
 
   useEffect(() => {
     const element = document.getElementById('my-text-area') ?? undefined
+    const div = document.createElement('div')
+    const root = createRoot(div)
+
     if (ref.current === undefined) {
       ref.current = new EasyMDE({
         element,
         initialValue: defaultValue,
         previewRender: (plainText) => {
           try {
-            return generate(plainText, mdxComponents)
+            // https://react.dev/reference/react-dom/server/renderToString#removing-rendertostring-from-the-client-code
+            const ele = generate(plainText, mdxComponents)
+            flushSync(() => {
+              root.render(ele)
+            })
+            return div.innerHTML
           } catch (err: any) {
             if (typeof err === 'object') {
-              return renderToStaticMarkup(
-                <div>
-                  <h1>{err?.name}</h1>
-                  <p>{err?.message}</p>
-                </div>
-              )
+              flushSync(() => {
+                root.render(
+                  <>
+                    <h1>{err?.name}</h1>
+                    <p>{err?.message}</p>
+                  </>
+                )
+              })
+              return div.innerHTML
             }
           }
           return ''
