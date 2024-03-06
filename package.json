@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -36,5 +37,12 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.8",
     "vite-plugin-dts": "^3.7.3"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/mdx-editor.js",
+      "require": "./dist/mdx-editor.umd.cjs"
+    },
+    "./style.css": "./dist/style.css"
   }
 }

@@ -13,7 +13,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/components/index.ts'),
-      name: 'index'
+      name: 'index',
+      fileName: 'index'
     },
     rollupOptions: {
       external: ['react'],
