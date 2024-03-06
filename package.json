@@ -1,7 +1,9 @@
 {
-  "name": "mdx-editor",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@bearlee/mdx-editor",
+  "private": false,
+  "version": "1.0.15",
+  "license": "MIT",
+	"repository": "https://github.com/Leehyunji0715/mdx-editor",
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -40,8 +42,8 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/mdx-editor.js",
-      "require": "./dist/mdx-editor.umd.cjs"
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
     },
     "./style.css": "./dist/style.css"
   }
