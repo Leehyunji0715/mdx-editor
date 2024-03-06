@@ -30,6 +30,12 @@ const Example = () => {
 }; 
 ```
 
+### MDX String Image
+![MDX String](./images/mdx_string.png)
+
+### MDX Preview Image
+![Preview](./images/mdx_preview.png)
+
 ## Future Work
 I used `MDXProvider` directly in `MDXEditor` component for easy use. However, I know that using `Provider` inside a component is not a good choice.
 
