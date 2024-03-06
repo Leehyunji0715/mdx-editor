@@ -17,7 +17,8 @@ You can simply give two props to `MDXEditor` component.
 
 ## Example
 ```tsx
-import { MDXEditor } from "@bearlee/mdx-editor"
+import { MDXEditor } from "@bearlee/mdx-editor";
+import from "@bearlee/mdx-editor/style.css";
 
 const MyButton = ({color}: {color: string}) => <button style={{ background: color }}>Button</button>;
 
